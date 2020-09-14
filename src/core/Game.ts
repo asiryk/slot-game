@@ -39,24 +39,19 @@ export default class Game {
     }
 
     handleStart() {
-        const start = Date.now()
+        const start = Date.now();
         this.playBtn.setDisabled();
-        let finishedCounter = 0;
         const tick = () => {
-            this.reels.elements.forEach(reel => {
+            this.reels.elements.forEach((reel, index) => {
                 reel.spinOneTime()
                     .then(() => {
-                        if (Date.now() >= start + 2000) {
-                            finishedCounter++;
-                        }
-                        if (finishedCounter === this.reels.elements.length) {
+                        if (index === this.reels.elements.length - 1 && Date.now() >= start + 2000) {
                             this.playBtn.setActive();
                             this.app.ticker.remove(tick);
                         }
-                    })
+                    });
             });
-
-        }
+        };
         this.app.ticker.add(tick);
 
     }
