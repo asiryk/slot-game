@@ -1,0 +1,95 @@
+{"frames": {
+
+"Bet_Line.png":
+{
+	"frame": {"x":0,"y":0,"w":770,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":770,"h":16},
+	"sourceSize": {"w":770,"h":16}
+},
+"BG.png":
+{
+	"frame": {"x":0,"y":16,"w":960,"h":536},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":536},
+	"sourceSize": {"w":960,"h":536}
+},
+"BTN_Spin.png":
+{
+	"frame": {"x":0,"y":552,"w":98,"h":98},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":98,"h":98},
+	"sourceSize": {"w":98,"h":98}
+},
+"BTN_Spin_d.png":
+{
+	"frame": {"x":98,"y":552,"w":98,"h":98},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":98,"h":98},
+	"sourceSize": {"w":98,"h":98}
+},
+"SYM1.png":
+{
+	"frame": {"x":196,"y":552,"w":235,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+	"sourceSize": {"w":235,"h":155}
+},
+"SYM2.png":
+{
+	"frame": {"x":431,"y":552,"w":235,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+	"sourceSize": {"w":235,"h":155}
+},
+"SYM3.png":
+{
+	"frame": {"x":666,"y":552,"w":235,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+	"sourceSize": {"w":235,"h":155}
+},
+"SYM4.png":
+{
+	"frame": {"x":0,"y":707,"w":235,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+	"sourceSize": {"w":235,"h":155}
+},
+"SYM5.png":
+{
+	"frame": {"x":235,"y":707,"w":235,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+	"sourceSize": {"w":235,"h":155}
+},
+"SYM6.png":
+{
+	"frame": {"x":470,"y":707,"w":235,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+	"sourceSize": {"w":235,"h":155}
+}},
+"animations": {
+	"SYM": ["SYM1.png","SYM2.png","SYM3.png","SYM4.png","SYM5.png","SYM6.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":960,"h":862},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2fbac0506dafbde5a6decc8a023a7efd:26fee3c088b671e971c379fab0f8a972:cbce6b53f0f49e0bf15173c25c41f876$"
+}
+}

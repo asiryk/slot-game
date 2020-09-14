@@ -1,0 +1,6 @@
+*.map
+*.log
+debug/
+build/
+node_modules/
+.idea/
