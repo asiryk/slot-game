@@ -4,6 +4,7 @@ import PlayButton from './PlayButton';
 import Background from './Background';
 import ReelsContainer from './ReelsContainer';
 import Scoreboard from './Scoreboard';
+import VictoryScreen from './VictoryScreen';
 
 export default class Game {
     public app: PIXI.Application;
@@ -12,6 +13,7 @@ export default class Game {
     private height = 536;
     private reelsContainer: ReelsContainer;
     private scoreboard: Scoreboard;
+    private victoryScreen: VictoryScreen;
 
     constructor() {
         this.app = new PIXI.Application({ width: this.width, height: this.height });
@@ -19,48 +21,78 @@ export default class Game {
         new Loader(this.app, this.init.bind(this));
     }
 
-    init() {
+    private init() {
         this.createScene();
         this.createPlayButton();
         this.createReels();
         this.createScoreboard();
+        this.createVictoryScreen();
     }
 
-    createScene() {
+    private createScene() {
         const bg = new Background(this.app.loader);
         this.app.stage.addChild(bg.sprite);
     }
 
-    createPlayButton() {
+    private createPlayButton() {
         this.playBtn = new PlayButton(this.app, this.handleStart.bind(this));
         this.app.stage.addChild(this.playBtn.sprite);
     }
 
-    createReels() {
+    private createReels() {
         this.reelsContainer = new ReelsContainer(this.app);
         this.app.stage.addChild(this.reelsContainer.container);
     }
 
-    createScoreboard() {
+    private createScoreboard() {
         this.scoreboard = new Scoreboard(this.app);
         this.app.stage.addChild(this.scoreboard.container);
+    }
+
+    private createVictoryScreen() {
+        this.victoryScreen = new VictoryScreen(this.app);
+        this.app.stage.addChild(this.victoryScreen.container);
+    }
+
+    private checkIfWin(symbols: Array<PIXI.Sprite>): boolean {
+        // Set of strings: 'SYM1', 'SYM2', ...
+        //
+        const combination: Set<string> = new Set();
+        symbols.forEach(symbol => combination.add(symbol.texture.textureCacheIds[0].split('.')[0]));
+        if (combination.size === 1 && !combination.has('SYM1')) return true;
+        return combination.size === 2 && combination.has('SYM1');
+
     }
 
     handleStart() {
         this.scoreboard.decrement();
         const start = Date.now();
         this.playBtn.setDisabled();
+        const receivedCombination: Array<PIXI.Sprite> = [];
+
         const tick = () => {
             this.reelsContainer.reels.forEach((reel, index) => {
                 reel.spinOneTime()
                     .then(() => {
-                        if (index === this.reelsContainer.reels.length - 1 && Date.now() >= start + 2000) {
-                            if (!this.scoreboard.outOfMoney) this.playBtn.setEnabled();
-                            this.app.ticker.remove(tick);
+                        if (Date.now() >= start + 2000) {
+                            // reel.sprites[2] - middle symbol of the reel
+                            //
+                            receivedCombination.push(reel.sprites[2]);
                         }
+
+                        if (index === this.reelsContainer.reels.length - 1 && Date.now() >= start + 2000) {
+                            this.app.ticker.remove(tick);
+                            if (this.checkIfWin(receivedCombination)) {
+                                this.scoreboard.increment();
+                                this.victoryScreen.show();
+                            }
+                            if (!this.scoreboard.outOfMoney) this.playBtn.setEnabled();
+                        }
+                        this.reelsContainer.blessRNG();
                     });
             });
         };
+
         this.app.ticker.add(tick);
     }
 }

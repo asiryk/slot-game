@@ -9,7 +9,7 @@ export default class Scoreboard {
 
     constructor(app: PIXI.Application) {
         this.container = new PIXI.Container();
-        this.generateScoreboard(app.screen.width, app.screen.height);
+        this.generate(app.screen.width, app.screen.height);
     }
 
     decrement() {
@@ -25,9 +25,10 @@ export default class Scoreboard {
     increment() {
         this.money += this.bet * 2;
         this.moneyText.text = `money: $${this.money}`;
+        if (this.outOfMoney) this.outOfMoney = false;
     }
 
-    private generateScoreboard(appWidth: number, appHeight: number) {
+    private generate(appWidth: number, appHeight: number) {
         const style = new PIXI.TextStyle({
             fontFamily: 'Arial',
             fontSize: 24,
@@ -35,10 +36,12 @@ export default class Scoreboard {
         });
 
         this.moneyText = new PIXI.Text(`money: $${this.money}`, style);
-        const betText = new PIXI.Text(`bet: $${this.bet}`, style);
-        betText.x = this.moneyText.x = 10;
         this.moneyText.y = 5;
+
+        const betText = new PIXI.Text(`bet: $${this.bet}`, style);
         betText.y = this.moneyText.height + 10;
+
+        betText.x = this.moneyText.x = 10;
 
         const rect = new PIXI.Graphics();
         rect.beginFill(0x02474E, 0.8);

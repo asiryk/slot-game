@@ -17,4 +17,10 @@ export default class ReelsContainer {
         }
         this.container.x = REEL_OFFSET_LEFT;
     }
+
+    blessRNG() {
+        this.reels.forEach(reel => {
+            reel.sprites[0].texture = reel.textures[Math.floor(Math.random() * reel.textures.length)];
+        });
+    }
 }

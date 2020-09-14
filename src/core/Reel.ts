@@ -2,8 +2,8 @@ import * as PIXI from 'pixi.js';
 
 export default class Reel {
     public readonly container: PIXI.Container;
-    public readonly sprites: Array<PIXI.Sprite> = [];
     public readonly textures: Array<PIXI.Texture>;
+    public sprites: Array<PIXI.Sprite> = [];
     private readonly appHeight: number;
 
     constructor(app: PIXI.Application, position: number) {
@@ -25,6 +25,7 @@ export default class Reel {
         const REEL_OFFSET_BETWEEN = 10;
         const NUMBER_OF_ROWS = 3;
         this.container.x = position * REEL_WIDTH;
+
         for (let i = 0; i < NUMBER_OF_ROWS + 1; i++) {
             const symbol = new PIXI.Sprite(this.textures[Math.floor(Math.random() * this.textures.length)]);
             symbol.scale.set(0.8);
@@ -47,6 +48,7 @@ export default class Reel {
         return new Promise(resolve => {
             for (let i = this.sprites.length - 1; i >= 0; i--) {
                 const symbol = this.sprites[i];
+
                 if (symbol.y + speed > this.appHeight + yOffset) {
                     doneRunning = true;
                     speed = this.appHeight - symbol.y + yOffset;
