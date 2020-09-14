@@ -10,7 +10,7 @@ export default class Game {
     private playBtn: PlayButton;
     private width = 960;
     private height = 536;
-    private reels: ReelsContainer;
+    private reelsContainer: ReelsContainer;
     private scoreboard: Scoreboard;
 
     constructor() {
@@ -37,8 +37,8 @@ export default class Game {
     }
 
     createReels() {
-        this.reels = new ReelsContainer(this.app);
-        this.app.stage.addChild(this.reels.container);
+        this.reelsContainer = new ReelsContainer(this.app);
+        this.app.stage.addChild(this.reelsContainer.container);
     }
 
     createScoreboard() {
@@ -51,11 +51,11 @@ export default class Game {
         const start = Date.now();
         this.playBtn.setDisabled();
         const tick = () => {
-            this.reels.elements.forEach((reel, index) => {
+            this.reelsContainer.reels.forEach((reel, index) => {
                 reel.spinOneTime()
                     .then(() => {
-                        if (index === this.reels.elements.length - 1 && Date.now() >= start + 2000) {
-                            if (!this.scoreboard.outOfMoney) this.playBtn.setActive();
+                        if (index === this.reelsContainer.reels.length - 1 && Date.now() >= start + 2000) {
+                            if (!this.scoreboard.outOfMoney) this.playBtn.setEnabled();
                             this.app.ticker.remove(tick);
                         }
                     });

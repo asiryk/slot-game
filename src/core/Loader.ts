@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js';
 
 export default class Loader {
-    loader: PIXI.Loader;
-    loadingScreen: PIXI.Text;
+    public loader: PIXI.Loader;
+    private loadingScreen: PIXI.Text;
 
     constructor(app: PIXI.Application, onAssetsLoaded: () => void) {
         this.loader = app.loader;
@@ -15,11 +15,11 @@ export default class Loader {
         app.stage.addChild(this.loadingScreen);
     }
 
-    loadAssets() {
+    private loadAssets() {
         this.loader.add('atlas', './assets/atlas.json');
     }
 
-    generateLoadingScreen(appWidth: number, appHeight: number) {
+    private generateLoadingScreen(appWidth: number, appHeight: number) {
         const style = new PIXI.TextStyle({
             fontFamily: 'Arial',
             fontSize: 36,

@@ -1,10 +1,10 @@
 import * as PIXI from 'pixi.js';
 
 export default class Reel {
-    private readonly appHeight: number;
     public readonly container: PIXI.Container;
-    private readonly textures: Array<PIXI.Texture>;
     public readonly sprites: Array<PIXI.Sprite> = [];
+    public readonly textures: Array<PIXI.Texture>;
+    private readonly appHeight: number;
 
     constructor(app: PIXI.Application, position: number) {
         this.appHeight = app.screen.height;
@@ -20,7 +20,7 @@ export default class Reel {
         this.generate(position);
     }
 
-    generate(position: number) {
+    private generate(position: number) {
         const REEL_WIDTH = 230;
         const REEL_OFFSET_BETWEEN = 10;
         const NUMBER_OF_ROWS = 3;

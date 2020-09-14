@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import Reel from './Reel';
 
 export default class ReelsContainer {
-    public readonly elements: Array<Reel> = [];
+    public readonly reels: Array<Reel> = [];
     public readonly container: PIXI.Container;
 
     constructor(app: PIXI.Application) {
@@ -12,7 +12,7 @@ export default class ReelsContainer {
 
         for (let i = 0; i < NUMBER_OF_REELS; i++) {
             const reel = new Reel(app, i);
-            this.elements.push(reel);
+            this.reels.push(reel);
             this.container.addChild(reel.container);
         }
         this.container.x = REEL_OFFSET_LEFT;

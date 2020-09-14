@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 export default class Background {
-    public sprite: PIXI.Container;
+    public readonly sprite: PIXI.Container;
     private readonly texture: PIXI.Texture;
 
     constructor(loader: PIXI.Loader) {
