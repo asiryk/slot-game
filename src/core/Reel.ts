@@ -5,9 +5,11 @@ export default class Reel {
     public readonly textures: Array<PIXI.Texture>;
     public sprites: Array<PIXI.Sprite> = [];
     private readonly appHeight: number;
+    private readonly ticker: PIXI.Ticker;
 
     constructor(app: PIXI.Application, position: number) {
         this.appHeight = app.screen.height;
+        this.ticker = app.ticker;
         this.container = new PIXI.Container();
         this.textures = [
             app.loader.resources.atlas!.textures!['SYM1.png'],
@@ -46,23 +48,28 @@ export default class Reel {
         let yOffset = (this.appHeight - this.sprites[0].height * 3) / 3 / 2;
 
         return new Promise(resolve => {
-            for (let i = this.sprites.length - 1; i >= 0; i--) {
-                const symbol = this.sprites[i];
+            const tick = () => {
+                for (let i = this.sprites.length - 1; i >= 0; i--) {
+                    const symbol = this.sprites[i];
 
-                if (symbol.y + speed > this.appHeight + yOffset) {
-                    doneRunning = true;
-                    speed = this.appHeight - symbol.y + yOffset;
-                    symbol.y = -(symbol.height + yOffset);
-                } else {
-                    symbol.y += speed;
-                }
+                    if (symbol.y + speed > this.appHeight + yOffset) {
+                        doneRunning = true;
+                        speed = this.appHeight - symbol.y + yOffset;
+                        symbol.y = -(symbol.height + yOffset);
+                    } else {
+                        symbol.y += speed;
+                    }
 
-                if (i === 0 && doneRunning) {
-                    resolve();
-                    let t = this.sprites.pop();
-                    if (t) this.sprites.unshift(t);
+                    if (i === 0 && doneRunning) {
+                        let t = this.sprites.pop();
+                        if (t) this.sprites.unshift(t);
+                        this.ticker.remove(tick);
+                        resolve();
+                    }
                 }
             }
+
+            this.ticker.add(tick);
         });
     }
 }
