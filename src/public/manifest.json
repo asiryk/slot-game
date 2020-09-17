@@ -1,0 +1,20 @@
+{
+  "short_name": "Slot Game",
+  "name": "Slot Game",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#608EC5",
+  "background_color": "#42916A",
+  "icons": [
+    {
+      "src": "/public/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
