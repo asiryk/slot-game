@@ -33,6 +33,7 @@ module.exports = {
     new HTMLPlugin({template: './src/index.html'}),
     new CopyPlugin({
       patterns: [
+        {from: './src/public/', to: 'public/'},
         {from: './src/styles/', to: 'styles/'},
         {from: './src/assets/', to: 'assets/'},
       ],
