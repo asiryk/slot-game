@@ -9,14 +9,12 @@ import VictoryScreen from './VictoryScreen';
 export default class Game {
     public app: PIXI.Application;
     private playBtn: PlayButton;
-    private width = 960;
-    private height = 536;
     private reelsContainer: ReelsContainer;
     private scoreboard: Scoreboard;
     private victoryScreen: VictoryScreen;
 
     constructor() {
-        this.app = new PIXI.Application({ width: this.width, height: this.height });
+        this.app = new PIXI.Application({ width: 960, height: 536 });
         window.document.body.appendChild(this.app.view);
         new Loader(this.app, this.init.bind(this));
     }
