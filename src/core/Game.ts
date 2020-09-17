@@ -57,15 +57,16 @@ export default class Game {
     handleStart() {
         this.scoreboard.decrement();
         this.playBtn.setDisabled();
-        const handleSpinningResult = (isWin: boolean) => {
-            if (isWin) {
-                this.scoreboard.increment();
-                this.victoryScreen.show();
-            }
-
-            if (!this.scoreboard.outOfMoney) this.playBtn.setEnabled();
-        };
-
-        this.reelsContainer.spin().then(handleSpinningResult);
+        this.reelsContainer.spin()
+            .then(this.processSpinResult.bind(this));
     }
+
+    private processSpinResult(isWin: boolean) {
+        if (isWin) {
+            this.scoreboard.increment();
+            this.victoryScreen.show();
+        }
+
+        if (!this.scoreboard.outOfMoney) this.playBtn.setEnabled();
+    };
 }
