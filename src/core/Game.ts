@@ -68,5 +68,5 @@ export default class Game {
         }
 
         if (!this.scoreboard.outOfMoney) this.playBtn.setEnabled();
-    };
+    }
 }
