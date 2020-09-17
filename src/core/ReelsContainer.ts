@@ -24,21 +24,17 @@ export default class ReelsContainer {
             if (Date.now() >= start + 2000) break;
         }
 
-        const arr = this.reels.map(reel => reel.sprites[1]);
-        return this.checkIfWin(arr);
+        // reel.sprites[2] - Middle visible symbol of the reel
+        //
+        return this.checkIfWin(this.reels.map(reel => reel.sprites[2]));
     }
 
     private async* infiniteSpinning() {
         while (true) {
-            for (let i = 0; i < this.reels.length; i++) {
-                if (i === this.reels.length - 1) {
-                    await this.reels[i].spinOneTime();
-                    this.blessRNG();
-                    yield;
-                }
-
-                this.reels[i].spinOneTime();
-            }
+            const spinningPromises = this.reels.map(reel => reel.spinOneTime());
+            await Promise.all(spinningPromises);
+            this.blessRNG();
+            yield;
         }
     }
 
