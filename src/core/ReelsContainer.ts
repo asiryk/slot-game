@@ -25,8 +25,10 @@ export default class ReelsContainer {
         const shiftingDelay = 500;
         const start = Date.now();
         const reelsToSpin = [...this.reels];
+        
         for await (let value of this.infiniteSpinning(reelsToSpin)) {
             const shiftingWaitTime = (this.reels.length - reelsToSpin.length + 1) * shiftingDelay;
+            
             if (Date.now() >= start + shiftingWaitTime) {
                 reelsToSpin.shift();
             }
