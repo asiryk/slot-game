@@ -15,13 +15,23 @@ export default class ReelsContainer {
             this.reels.push(reel);
             this.container.addChild(reel.container);
         }
+
         this.container.x = REEL_OFFSET_LEFT;
     }
 
     async spin() {
+        // Overall time of spinning = shiftingDelay * this.reels.length
+        //
+        const shiftingDelay = 500;
         const start = Date.now();
-        for await (let value of this.infiniteSpinning()) {
-            if (Date.now() >= start + 2000) break;
+        const reelsToSpin = [...this.reels];
+        for await (let value of this.infiniteSpinning(reelsToSpin)) {
+            const shiftingWaitTime = (this.reels.length - reelsToSpin.length + 1) * shiftingDelay;
+            if (Date.now() >= start + shiftingWaitTime) {
+                reelsToSpin.shift();
+            }
+
+            if (!reelsToSpin.length) break;
         }
 
         // reel.sprites[2] - Middle visible symbol of the reel
@@ -29,9 +39,9 @@ export default class ReelsContainer {
         return this.checkIfWin(this.reels.map(reel => reel.sprites[2]));
     }
 
-    private async* infiniteSpinning() {
+    private async* infiniteSpinning(reelsToSpin: Array<Reel>) {
         while (true) {
-            const spinningPromises = this.reels.map(reel => reel.spinOneTime());
+            const spinningPromises = reelsToSpin.map(reel => reel.spinOneTime());
             await Promise.all(spinningPromises);
             this.blessRNG();
             yield;
