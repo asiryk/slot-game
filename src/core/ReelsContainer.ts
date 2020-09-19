@@ -38,7 +38,7 @@ export default class ReelsContainer {
 
         // reel.sprites[2] - Middle visible symbol of the reel
         //
-        return this.checkIfWin(this.reels.map(reel => reel.sprites[2]));
+        return this.checkForWin(this.reels.map(reel => reel.sprites[2]));
     }
 
     private async* infiniteSpinning(reelsToSpin: Array<Reel>) {
@@ -50,7 +50,7 @@ export default class ReelsContainer {
         }
     }
 
-    private checkIfWin(symbols: Array<PIXI.Sprite>): boolean {
+    private checkForWin(symbols: Array<PIXI.Sprite>): boolean {
         // Set of strings: 'SYM1', 'SYM2', ...
         //
         const combination: Set<string> = new Set();
