@@ -10,9 +10,7 @@
     "serve:lan": "webpack-dev-server --hot --host 0.0.0.0"
   },
   "dependencies": {
-    "@types/express": "^4.17.8",
     "@types/node": "^14.10.1",
-    "express": "^4.17.1",
     "pixi.js": "^5.3.3",
     "ts-node": "^9.0.0"
   },
