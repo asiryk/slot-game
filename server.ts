@@ -1,16 +1,18 @@
-import express, { Request, Response } from 'express';
-import path from 'path';
+import { join, resolve } from "path";
+import { promises as fs } from "fs";
+import { createServer } from "http";
 
-const app = express();
-
-app.use(express.static('./build'));
-
-app.get('*', (req: Request, res: Response) => {
-    res.sendFile(path.resolve('./build/index.html'));
-});
-
+const STATIC_PATH = resolve("./build");
 const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-    console.log(`server is listening on port ${PORT}`);
-});
+createServer(async (req, res) => {
+    const url = req.url === "/" ? "/index.html" : req.url;
+    const filePath = join(STATIC_PATH, `${url}`);
+    try {
+        const data = await fs.readFile(filePath);
+        res.end(data);
+    } catch (err) {
+        res.statusCode = 404;
+        res.end(`File "${url}" is not found`);
+    }
+}).listen(PORT, () => console.log(`Static on port ${PORT}`));
