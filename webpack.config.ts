@@ -1,54 +1,64 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const HTMLPlugin = require('html-webpack-plugin');
-const isDev = process.env.NODE_ENV !== 'production';
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const HTMLPlugin = require("html-webpack-plugin");
+const IS_DEV_MODE = process.argv.reduce((acc, arg) => acc || arg.includes("development"), false);
+
+const BUILD_PATH = path.resolve("build");
 
 module.exports = {
-  mode: isDev ? 'development' : 'production',
-  entry: './src/index.ts',
+  devtool: IS_DEV_MODE && "cheap-module-source-map",
+  entry: "./src/index.ts",
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: '[name].[hash].js',
+    path: BUILD_PATH,
+    filename: "[name].[contenthash:8].js",
+    clean: true,
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".ts", ".js"],
   },
   module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(js|ts)$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      },
-    ],
+    rules: getLoaders(),
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HTMLPlugin({template: './src/index.html'}),
-    new CopyPlugin({
-      patterns: [
-        {from: './src/public/', to: 'public/'},
-        {from: './src/styles/', to: 'styles/'},
-        {from: './src/assets/', to: 'assets/'},
-      ],
-    }),
-  ],
+  plugins: getPlugins(),
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
-    compress: true,
+    contentBase: BUILD_PATH,
     port: 4200,
     hot: true,
   },
-  optimization: {
-    minimize: !isDev,
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+  optimization: getOptimizations(),
 };
+
+function getOptimizations() {
+  return {
+    minimize: !IS_DEV_MODE,
+    splitChunks: {
+      chunks: "all",
+    },
+    runtimeChunk: {
+      name: (entrypoint: any) => `runtime-${entrypoint.name}`,
+    },
+  };
+}
+
+function getLoaders() {
+  return [
+    {
+      test: /\.tsx?$/,
+      loader: "ts-loader",
+      exclude: /node_modules/,
+    },
+  ];
+}
+
+function getPlugins() {
+  return [
+    new HTMLPlugin({ template: "./src/index.html" }),
+    new CopyPlugin({
+      patterns: [
+        { from: "./src/public/", to: "public/" },
+        { from: "./src/styles/", to: "styles/" },
+        { from: "./src/assets/", to: "assets/" },
+      ],
+    }),
+  ];
+}
