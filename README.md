@@ -8,8 +8,8 @@ A simple slot machine game with three reels.
 ---
 
 #### What you need to run this code
-1. Node (12.18.x)
-2. Yarn (1.22.x)
+1. Node (16.x)
+2. npm (7.x)
 
 #### How to run this code
 1. Clone this repository

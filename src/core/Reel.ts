@@ -47,7 +47,7 @@ export default class Reel {
         let doneRunning = false;
         let yOffset = (this.appHeight - this.sprites[0].height * 3) / 3 / 2;
 
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             const tick = () => {
                 for (let i = this.sprites.length - 1; i >= 0; i--) {
                     const symbol = this.sprites[i];

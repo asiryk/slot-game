@@ -29,7 +29,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "engines": {
-    "node": "12.x",
-    "yarn": "1.22.x"
+    "node": "16.x",
+    "npm": "7.x"
   }
 }
