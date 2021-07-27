@@ -1,7 +1,7 @@
 # Slot machine game
 A simple slot machine game with three reels.
 
-![Slots](./examples/Screenshot_20200915-112117.jpg "Slots")
+![Slots](./examples/Screenshot 2021-07-27 233210.jpg "Slots")
 
 ### [Live Demo](https://pixi-slot-game.herokuapp.com/ "Slot game")
 
