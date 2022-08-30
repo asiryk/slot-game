@@ -4,27 +4,22 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "vite build",
     "start": "ts-node server.ts",
-    "serve": "webpack serve --open --mode=development",
-    "serve:lan": "webpack serve --host 0.0.0.0"
+    "dev": "vite"
   },
   "dependencies": {
-    "@types/node": "^16.4.3",
-    "pixi.js": "^6.0.4",
-    "ts-node": "^10.1.0"
+    "@types/node": "16.11.7",
+    "pixi.js": "6.5.2",
+    "ts-node": "10.9.1"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^9.0.1",
-    "html-webpack-plugin": "^5.3.2",
-    "ts-loader": "^9.2.4",
-    "typescript": "^4.3.5",
-    "webpack": "^5.47.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "rollup-plugin-copy": "3.4.0",
+    "typescript": "4.8.2",
+    "vite": "3.0.9"
   },
   "engines": {
     "node": "16.x",
-    "npm": "7.x"
+    "npm": "8.x"
   }
 }
