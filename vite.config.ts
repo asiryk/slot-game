@@ -9,6 +9,15 @@ const config = defineConfig(() => {
       outDir: path.resolve("dist"),
       emptyOutDir: true,
       rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes("node_modules/@pixi/core")) {
+              return "pixi.js-core";
+            } else if (id.includes("node_modules/@pixi")) {
+              return "pixi.js";
+            }
+          },
+        },
         plugins: [
           copy({
             targets: [
