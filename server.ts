@@ -4,7 +4,7 @@ import { createServer } from "http";
 
 const STATIC_PATH = resolve("./build");
 const PORT = process.env.PORT || 8080;
-
+//
 createServer(async (req, res) => {
     const url = req.url === "/" ? "/index.html" : req.url;
     const filePath = join(STATIC_PATH, `${url}`);
