@@ -1,7 +1,7 @@
 # Slot machine game
 A simple slot machine game with three reels.
 
-![Slots](./examples/Screenshot_2021-07-27-233210.jpg "Slots")
+![Slots](https://user-images.githubusercontent.com/61456651/205433186-9b1e4d90-98b5-4afb-86d0-8fe9bd86c7d3.jpg)
 
 ### [Live Demo](https://asiryk.github.io/slot-game/ "Slot game")
 
@@ -9,7 +9,7 @@ A simple slot machine game with three reels.
 
 #### What you need to run this code
 1. Node (16.x)
-2. npm (7.x)
+2. npm (8.x)
 
 #### How to run this code
 1. Clone this repository
@@ -17,11 +17,7 @@ A simple slot machine game with three reels.
    - To install dependencies, run ```npm install```
    - To run the application for development, run ```npm run serve```
 3. Open [localhost:4200](http://localhost:4200/) in the browser
-4. To run the application on the local network
-   - Run ```npm run serve:lan```
-   - Find your computer's address on the network. In terminal, type ```ipconfig``` and look for IPv4 Address, or the one with something like **192.168.1.1**
-   - In your mobile device on the same network, visit [http://192.168.1.1:4200](http://192.168.1.1:4200).
-   
+
 ---
 
 ### Features
