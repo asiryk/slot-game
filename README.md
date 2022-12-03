@@ -3,7 +3,7 @@ A simple slot machine game with three reels.
 
 ![Slots](./examples/Screenshot_2021-07-27-233210.jpg "Slots")
 
-### [Live Demo](https://pixi-slot-game.herokuapp.com/ "Slot game")
+### [Live Demo](https://asiryk.github.io/slot-game/ "Slot game")
 
 ---
 
