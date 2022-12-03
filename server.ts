@@ -2,7 +2,7 @@ import { join, resolve } from "path";
 import { promises as fs } from "fs";
 import { createServer } from "http";
 
-const STATIC_PATH = resolve("./build");
+const STATIC_PATH = resolve("./dist");
 const PORT = process.env.PORT || 8080;
 
 createServer(async (req, res) => {

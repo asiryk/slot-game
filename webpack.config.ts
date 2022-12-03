@@ -3,7 +3,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const HTMLPlugin = require("html-webpack-plugin");
 const IS_DEV_MODE = process.argv.reduce((acc, arg) => acc || arg.includes("development"), false);
 
-const BUILD_PATH = path.resolve("build");
+const BUILD_PATH = path.resolve("dist");
 
 module.exports = {
   devtool: IS_DEV_MODE && "cheap-module-source-map",

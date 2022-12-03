@@ -2,9 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,7 +36,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Path of the directory containing the static assets.
-          path: ./build
+          path: ./dist
           # Duration after which artifact will expire in days.
           retention-days: 1
 
@@ -54,5 +52,4 @@ jobs:
         uses: actions/deploy-pages@v1
         id: deployment
         with:
-          emit_telemetry: false
           artifact_name: github-pages
