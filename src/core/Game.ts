@@ -1,20 +1,20 @@
-import * as PIXI from 'pixi.js';
 import Loader from './Loader';
 import PlayButton from './PlayButton';
 import Background from './Background';
 import ReelsContainer from './ReelsContainer';
 import Scoreboard from './Scoreboard';
 import VictoryScreen from './VictoryScreen';
+import { Application } from 'pixi.js';
 
 export default class Game {
-    public app: PIXI.Application;
+    public app: Application;
     private playBtn: PlayButton;
     private reelsContainer: ReelsContainer;
     private scoreboard: Scoreboard;
     private victoryScreen: VictoryScreen;
 
     constructor() {
-        this.app = new PIXI.Application({ width: 960, height: 536 });
+        this.app = new Application({ width: 960, height: 536 });
         window.document.body.appendChild(this.app.view);
         new Loader(this.app, this.init.bind(this));
     }

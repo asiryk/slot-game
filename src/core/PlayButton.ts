@@ -1,16 +1,16 @@
-import * as PIXI from 'pixi.js';
+import { Application, Sprite, Texture } from "pixi.js";
 
 export default class PlayButton {
-    public readonly sprite: PIXI.Sprite;
+    public readonly sprite: Sprite;
     private readonly onClick: () => void;
-    private readonly activeTexture: PIXI.Texture;
-    private readonly disabledTexture: PIXI.Texture;
+    private readonly activeTexture: Texture;
+    private readonly disabledTexture: Texture;
 
-    constructor(app: PIXI.Application, onClick: () => void) {
+    constructor(app: Application, onClick: () => void) {
         this.onClick = onClick;
-        this.activeTexture = app.loader.resources!.atlas.textures!['BTN_Spin.png'];
-        this.disabledTexture = app.loader.resources!.atlas.textures!['BTN_Spin_d.png'];
-        this.sprite = new PIXI.Sprite(this.activeTexture);
+        this.activeTexture = app.loader.resources.atlas.textures!['BTN_Spin.png'];
+        this.disabledTexture = app.loader.resources.atlas.textures!['BTN_Spin_d.png'];
+        this.sprite = new Sprite(this.activeTexture);
         this.init(app.screen.width, app.screen.height);
     }
 

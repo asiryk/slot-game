@@ -1,14 +1,14 @@
-import * as PIXI from 'pixi.js';
+import { Application, Container, Sprite } from 'pixi.js';
 import Reel from './Reel';
 
 export default class ReelsContainer {
     public readonly reels: Array<Reel> = [];
-    public readonly container: PIXI.Container;
+    public readonly container: Container;
 
-    constructor(app: PIXI.Application) {
+    constructor(app: Application) {
         const REEL_OFFSET_LEFT = 70;
         const NUMBER_OF_REELS = 3;
-        this.container = new PIXI.Container();
+        this.container = new Container();
 
         for (let i = 0; i < NUMBER_OF_REELS; i++) {
             const reel = new Reel(app, i);
@@ -25,10 +25,10 @@ export default class ReelsContainer {
         const shiftingDelay = 500;
         const start = Date.now();
         const reelsToSpin = [...this.reels];
-        
+
         for await (let value of this.infiniteSpinning(reelsToSpin)) {
             const shiftingWaitTime = (this.reels.length - reelsToSpin.length + 1) * shiftingDelay;
-            
+
             if (Date.now() >= start + shiftingWaitTime) {
                 reelsToSpin.shift();
             }
@@ -50,7 +50,7 @@ export default class ReelsContainer {
         }
     }
 
-    private checkForWin(symbols: Array<PIXI.Sprite>): boolean {
+    private checkForWin(symbols: Array<Sprite>): boolean {
         // Set of strings: 'SYM1', 'SYM2', ...
         //
         const combination: Set<string> = new Set();

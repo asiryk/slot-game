@@ -1,16 +1,16 @@
-import * as PIXI from 'pixi.js';
+import { Application, Container, Sprite, Texture, Ticker } from "pixi.js";
 
 export default class Reel {
-    public readonly container: PIXI.Container;
-    public readonly textures: Array<PIXI.Texture>;
-    public sprites: Array<PIXI.Sprite> = [];
+    public readonly container: Container;
+    public readonly textures: Array<Texture>;
+    public sprites: Array<Sprite> = [];
     private readonly appHeight: number;
-    private readonly ticker: PIXI.Ticker;
+    private readonly ticker: Ticker;
 
-    constructor(app: PIXI.Application, position: number) {
+    constructor(app: Application, position: number) {
         this.appHeight = app.screen.height;
         this.ticker = app.ticker;
-        this.container = new PIXI.Container();
+        this.container = new Container();
         this.textures = [
             app.loader.resources.atlas!.textures!['SYM1.png'],
             app.loader.resources.atlas!.textures!['SYM2.png'],
@@ -29,7 +29,7 @@ export default class Reel {
         this.container.x = position * REEL_WIDTH;
 
         for (let i = 0; i < NUMBER_OF_ROWS + 1; i++) {
-            const symbol = new PIXI.Sprite(this.textures[Math.floor(Math.random() * this.textures.length)]);
+            const symbol = new Sprite(this.textures[Math.floor(Math.random() * this.textures.length)]);
             symbol.scale.set(0.8);
             const widthDiff = REEL_WIDTH - symbol.width;
             symbol.x = position * REEL_OFFSET_BETWEEN + widthDiff / 2;

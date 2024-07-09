@@ -1,11 +1,11 @@
-import * as PIXI from 'pixi.js';
+import { Container, Loader, Sprite, Texture } from "pixi.js";
 
 export default class Background {
-    public readonly sprite: PIXI.Container;
-    private readonly texture: PIXI.Texture;
+    public readonly sprite: Container;
+    private readonly texture: Texture;
 
-    constructor(loader: PIXI.Loader) {
-        this.texture = loader.resources!.atlas.textures!['BG.png'];
-        this.sprite = new PIXI.Sprite(this.texture);
+    constructor(loader: Loader) {
+        this.texture = loader.resources.atlas.textures!['BG.png'];
+        this.sprite = new Sprite(this.texture);
     }
 }

@@ -1,16 +1,16 @@
-import * as PIXI from 'pixi.js';
+import { Application, Container, Graphics, Text, TextStyle } from "pixi.js";
 
 export default class Scoreboard {
-    public container: PIXI.Container;
+    public container: Container;
     public outOfMoney = false;
-    private winAmountText: PIXI.Text;
-    private moneyText: PIXI.Text;
+    private winAmountText: Text;
+    private moneyText: Text;
     private winAmount: number = 0;
     private money: number = 100;
     private bet: number = 5;
 
-    constructor(app: PIXI.Application) {
-        this.container = new PIXI.Container();
+    constructor(app: Application) {
+        this.container = new Container();
         this.generate(app.screen.width, app.screen.height);
     }
 
@@ -33,24 +33,24 @@ export default class Scoreboard {
     }
 
     private generate(appWidth: number, appHeight: number) {
-        const style = new PIXI.TextStyle({
+        const style = new TextStyle({
             fontFamily: 'Arial',
             fontSize: 24,
             fill: 'yellow',
         });
 
-        this.moneyText = new PIXI.Text(`money: $${this.money}`, style);
+        this.moneyText = new Text(`money: $${this.money}`, style);
         this.moneyText.y = 5;
 
-        const betText = new PIXI.Text(`bet: $${this.bet}`, style);
+        const betText = new Text(`bet: $${this.bet}`, style);
         betText.y = this.moneyText.height + 10;
 
-        this.winAmountText = new PIXI.Text(`win: $${this.winAmount}`, style);
+        this.winAmountText = new Text(`win: $${this.winAmount}`, style);
         this.winAmountText.y = betText.y + betText.height + 5;
 
         betText.x = this.moneyText.x = this.winAmountText.x = 10;
 
-        const rect = new PIXI.Graphics();
+        const rect = new Graphics();
         rect.beginFill(0x02474E, 0.8);
         const rectHeight = this.moneyText.height + betText.height + this.winAmountText.height + 25;
         rect.drawRect(0, 0, 160, rectHeight);
