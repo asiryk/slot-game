@@ -2,5 +2,6 @@
 *.log
 debug/
 build/
+dist/
 node_modules/
 .idea/

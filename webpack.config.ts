@@ -21,7 +21,10 @@ module.exports = {
   },
   plugins: getPlugins(),
   devServer: {
-    contentBase: BUILD_PATH,
+    static: {
+      directory: path.join(__dirname, BUILD_PATH),
+    },
+    compress: false,
     port: 4200,
     hot: true,
   },

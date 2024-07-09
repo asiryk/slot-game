@@ -6,25 +6,25 @@
   "scripts": {
     "build": "webpack --mode=production",
     "start": "ts-node server.ts",
-    "serve": "webpack serve --open --mode=development",
+    "serve": "webpack serve --mode=development",
     "serve:lan": "webpack serve --host 0.0.0.0"
   },
   "dependencies": {
-    "@types/node": "^16.4.3",
-    "pixi.js": "^6.0.4",
-    "ts-node": "^10.1.0"
+    "@types/node": "20.14.10",
+    "pixi.js": "6.0.4",
+    "ts-node": "10.9.2"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^9.0.1",
-    "html-webpack-plugin": "^5.3.2",
-    "ts-loader": "^9.2.4",
-    "typescript": "^4.3.5",
-    "webpack": "^5.47.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "copy-webpack-plugin": "12.0.2",
+    "html-webpack-plugin": "5.6.0",
+    "ts-loader": "9.5.1",
+    "typescript": "5.5.3",
+    "webpack": "5.92.1",
+    "webpack-cli": "5.1.4",
+    "webpack-dev-server": "5.0.4"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "8.x"
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
