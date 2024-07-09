@@ -1,5 +1,5 @@
 const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
+const rspack = require("@rspack/core");
 const HTMLPlugin = require("html-webpack-plugin");
 const IS_DEV_MODE = process.argv.reduce((acc, arg) => acc || arg.includes("development"), false);
 
@@ -47,8 +47,16 @@ function getLoaders() {
   return [
     {
       test: /\.tsx?$/,
-      loader: "ts-loader",
-      exclude: /node_modules/,
+      exclude: [/node_modules/],
+      loader: "builtin:swc-loader",
+      options: {
+        jsc: {
+          parser: {
+            syntax: "typescript",
+          },
+        },
+      },
+      type: "javascript/auto",
     },
   ];
 }
@@ -56,7 +64,7 @@ function getLoaders() {
 function getPlugins() {
   return [
     new HTMLPlugin({ template: "./src/index.html" }),
-    new CopyPlugin({
+    new rspack.CopyRspackPlugin({
       patterns: [
         { from: "./src/public/", to: "public/" },
         { from: "./src/styles/", to: "styles/" },
