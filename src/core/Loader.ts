@@ -1,34 +1,39 @@
-import { Application, Loader as PixiLoader, Text, TextStyle } from "pixi.js"
+import { Application, Assets, Text, TextStyle } from "pixi.js"
 
 export default class Loader {
-    public loader: PixiLoader;
     private loadingScreen: Text;
+    private app: Application;
 
-    constructor(app: Application, onAssetsLoaded: () => void) {
-        this.loader = app.loader;
-        this.loadAssets();
-        this.loader.load(() => {
-            app.stage.removeChild(this.loadingScreen);
-            onAssetsLoaded();
-        });
-        this.generateLoadingScreen(app.screen.width, app.screen.height);
-        app.stage.addChild(this.loadingScreen);
+    constructor(app: Application) {
+        this.app = app;
+        this.loadingScreen = this.createLoadingScreen(app.screen.width, app.screen.height);
     }
 
-    private loadAssets() {
-        this.loader.add('atlas', './assets/atlas.json');
+    public showLoadingScreen() {
+        this.app.stage.addChild(this.loadingScreen);
     }
 
-    private generateLoadingScreen(appWidth: number, appHeight: number) {
+    public hideLoadingScreen() {
+        this.app.stage.removeChild(this.loadingScreen);
+    }
+
+    public async loadAssets() {
+        this.showLoadingScreen();
+        Assets.add({ alias: "atlas", src: "./assets/atlas.json" });
+        await Assets.load(["atlas"]);
+        this.hideLoadingScreen();
+    }
+
+    private createLoadingScreen(appWidth: number, appHeight: number): Text {
         const style = new TextStyle({
-            fontFamily: 'Arial',
+            fontFamily: "Arial",
             fontSize: 36,
-            fontWeight: 'bold',
-            fill: '#ffffff',
+            fontWeight: "bold",
+            fill: "#ffffff",
         });
-        const playText = new Text('Loading...', style);
+        const playText = new Text({ text: "Loading...", style });
         playText.x = (appWidth - playText.width) / 2;
         playText.y = (appHeight - playText.height) / 2;
-        this.loadingScreen = playText;
+        return playText;
     }
 }

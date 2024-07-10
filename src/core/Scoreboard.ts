@@ -34,27 +34,26 @@ export default class Scoreboard {
 
     private generate(appWidth: number, appHeight: number) {
         const style = new TextStyle({
-            fontFamily: 'Arial',
+            fontFamily: "Arial",
             fontSize: 24,
-            fill: 'yellow',
+            fill: "yellow",
         });
 
-        this.moneyText = new Text(`money: $${this.money}`, style);
+        this.moneyText = new Text({ text: `money: $${this.money}`, style });
         this.moneyText.y = 5;
 
-        const betText = new Text(`bet: $${this.bet}`, style);
+        const betText = new Text({ text: `bet: $${this.bet}`, style });
         betText.y = this.moneyText.height + 10;
 
-        this.winAmountText = new Text(`win: $${this.winAmount}`, style);
+        this.winAmountText = new Text({ text: `win: $${this.winAmount}`, style });
         this.winAmountText.y = betText.y + betText.height + 5;
 
         betText.x = this.moneyText.x = this.winAmountText.x = 10;
 
-        const rect = new Graphics();
-        rect.beginFill(0x02474E, 0.8);
         const rectHeight = this.moneyText.height + betText.height + this.winAmountText.height + 25;
-        rect.drawRect(0, 0, 160, rectHeight);
-        rect.endFill();
+        const rect = new Graphics()
+            .rect(0, 0, 160, rectHeight)
+            .fill({ color: 0x02474E, alpha: 0.8 });
 
         this.container.x = appWidth - rect.width - 7;
         this.container.y = appHeight / 2 + 70;

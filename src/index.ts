@@ -1,3 +1,5 @@
-import Game from './core/Game';
+import Game from "./core/Game";
 
-new Game();
+const game = new Game();
+game.init();
+window.game = game;

@@ -1,4 +1,4 @@
-import { Application, Container, Sprite, Texture, Ticker } from "pixi.js";
+import { Application, Assets, Container, Sprite, Texture, Ticker } from "pixi.js";
 
 export default class Reel {
     public readonly container: Container;
@@ -11,13 +11,14 @@ export default class Reel {
         this.appHeight = app.screen.height;
         this.ticker = app.ticker;
         this.container = new Container();
+        const atlas = Assets.get("atlas");
         this.textures = [
-            app.loader.resources.atlas!.textures!['SYM1.png'],
-            app.loader.resources.atlas!.textures!['SYM2.png'],
-            app.loader.resources.atlas!.textures!['SYM3.png'],
-            app.loader.resources.atlas!.textures!['SYM4.png'],
-            app.loader.resources.atlas!.textures!['SYM5.png'],
-            app.loader.resources.atlas!.textures!['SYM6.png'],
+            atlas.textures["SYM1.png"],
+            atlas.textures["SYM2.png"],
+            atlas.textures["SYM3.png"],
+            atlas.textures["SYM4.png"],
+            atlas.textures["SYM5.png"],
+            atlas.textures["SYM6.png"],
         ];
         this.generate(position);
     }

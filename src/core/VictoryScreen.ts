@@ -16,7 +16,7 @@ export default class VictoryScreen {
             window.clearTimeout(id);
             this.hide();
         };
-        this.overlay.addListener('pointerdown', handler.bind(this));
+        this.overlay.addListener("pointerdown", handler.bind(this));
     }
 
     hide() {
@@ -26,28 +26,27 @@ export default class VictoryScreen {
     private generate(appWidth: number, appHeight: number) {
         this.container.visible = false;
 
-        this.overlay = new Graphics();
-        this.overlay.beginFill(0xFFFFFF, 0.001);
-        this.overlay.drawRect(0, 0, appWidth, appHeight);
-        this.overlay.endFill();
-        this.overlay.interactive = true;
-        this.overlay.buttonMode = true;
-        this.overlay.cursor = 'default';
+        this.overlay = new Graphics()
+            .rect(0, 0, appWidth, appHeight)
+            .fill({ color: 0xffffff, alpha: 0.001 });
 
-        const rect = new Graphics();
-        rect.beginFill(0x02474E, 0.8);
-        rect.drawRect(0, 0, 717.5, 400);
+        this.overlay.interactive = true;
+        this.overlay.eventMode = "static";
+        this.overlay.cursor = "default";
+
+        const rect = new Graphics()
+            .rect(0, 0, 717.5, 400)
+            .fill({ color: 0x02474E, alpha: 0.8 });
         rect.x = 70;
         rect.y = (appHeight - rect.height) / 2;
-        rect.endFill();
 
         const style = new TextStyle({
-            fontFamily: 'Arial',
+            fontFamily: "Arial",
             fontSize: 96,
-            fill: 'yellow',
+            fill: "yellow",
         });
 
-        const text = new Text('YOU WON!', style);
+        const text = new Text({ text: "YOU WON!", style });
         text.x = 70 + (rect.width - text.width) / 2;
         text.y = (appHeight - text.height) / 2;
 

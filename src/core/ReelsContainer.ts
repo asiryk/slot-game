@@ -1,5 +1,5 @@
-import { Application, Container, Sprite } from 'pixi.js';
-import Reel from './Reel';
+import { Application, Container, Sprite } from "pixi.js";
+import Reel from "./Reel";
 
 export default class ReelsContainer {
     public readonly reels: Array<Reel> = [];
@@ -26,7 +26,7 @@ export default class ReelsContainer {
         const start = Date.now();
         const reelsToSpin = [...this.reels];
 
-        for await (let value of this.infiniteSpinning(reelsToSpin)) {
+        for await (let _ of this.infiniteSpinning(reelsToSpin)) {
             const shiftingWaitTime = (this.reels.length - reelsToSpin.length + 1) * shiftingDelay;
 
             if (Date.now() >= start + shiftingWaitTime) {
@@ -51,12 +51,12 @@ export default class ReelsContainer {
     }
 
     private checkForWin(symbols: Array<Sprite>): boolean {
-        // Set of strings: 'SYM1', 'SYM2', ...
+        // Set of strings: "SYM1", "SYM2", ...
         //
         const combination: Set<string> = new Set();
-        symbols.forEach(symbol => combination.add(symbol.texture.textureCacheIds[0].split('.')[0]));
-        if (combination.size === 1 && !combination.has('SYM1')) return true;
-        return combination.size === 2 && combination.has('SYM1');
+        symbols.forEach(symbol => combination.add(symbol.texture.label!.split(".")[0]));
+        if (combination.size === 1 && !combination.has("SYM1")) return true;
+        return combination.size === 2 && combination.has("SYM1");
     }
 
     private blessRNG() {
