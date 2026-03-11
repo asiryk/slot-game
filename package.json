@@ -20,7 +20,7 @@
     "typescript": "5.5.3"
   },
   "engines": {
-    "node": "20.x",
-    "npm": "10.x"
+    "node": ">20.x",
+    "npm": ">10.x"
   }
 }
